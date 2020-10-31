@@ -52,7 +52,10 @@
             
                 font-family: "Creepster";
                 background: none;
-            }
+                font-size: 40px;
+                }
+                
+               
             
             
             #playlist{
@@ -77,9 +80,9 @@
             #playlist li a{
                 text-decoration: none;
                 color: black;
-                margin-top: 5px;
+                margin-top: 2px;
                 background: none;
-                
+                  font-size: 20px;
                 
                
             }
@@ -116,9 +119,7 @@
             display: block;
             }
             
-            #audioPlayer2{
-            display: none;
-            }
+    
                 
             img {
                 width: 500px;
@@ -135,6 +136,15 @@
                 width: 500px;
                 padding-left: 0;
             }
+                
+                
+                h1{
+                font-size: 5vw;
+                }
+                
+                #playlist li a{
+                font-size: 1em;
+                }
                 
                
                 
@@ -182,9 +192,7 @@
           
         <div id="contain-aud">
         <IMG SRC="halloween_radio.gif">
-        <audio src="" controls id="audioPlayer">
-            Det er jeg ked af, det syge Halloween-Mix kan kun afspilles hvis din browser understøtter HTML5
-        </audio>
+        
         </div>    
        
       </div>
@@ -192,31 +200,9 @@
         <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
         <script>
             // loads the audio player
-            audioPlayer();
-            function audioPlayer() {
-                var currentSong = 0; 
-                $("#audioPlayer")[0].src = $("#playlist li a")[0];
-                $("#audioPlayer")[0].play();
-                $("#playlist li a").click(function(e){
-                    e.preventDefault();
-                    $("#audioPlayer")[0].src = this;
-                    $("#audioPlayer")[0].play()
-                    $("#playlist li").removeClass("current-song");
-                    currentSong = $(this).parent().index();
-                    $(this).parent().addClass("current-song");
-                });
-                
-                $("#audioPlayer")[0].addEventListener("ended", function(){
-                    currentSong++;
-                        $("#playlist li").removeClass("current-song");
-                        $("#playlist li:eq("+currentSong+")").addClass("current-song");
-                        $("#audioPlayer")[0].src = $("#playlist li a")[currentSong].href;
-                        $("#audioPlayer")[0].play();
-                });
-                
-            }
-            
+
             audioPlayer2();
+
             
                         function audioPlayer2() {
                 var currentSong = 0; 
