@@ -1,0 +1,174 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Halloween Mix</title>
+        <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+        <style>
+            
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                background: black;
+           
+            }
+            
+            
+            
+            #flex-contain{
+                display: flex;
+                padding: 2%;
+                width: 100vw;
+                flex-wrap: wrap;
+                justify-content: center;
+            align-items: center;
+            
+            }
+            
+            img {
+                width: 100vw;
+                display: block;
+            }
+            
+            #contain-aud {
+                width: 100vw;
+                align-items: center;
+                
+           
+              display: flex;
+            justify-content: center;
+            align-items: center;
+                flex-direction: column;
+               flex-wrap: wrap;
+                
+            }
+            
+            
+            
+            h1{
+            
+                font-family: "Creepster";
+                background: none;
+            }
+            
+            
+            #playlist{
+                list-style: none;
+                background-color: orange;
+                width: 100vw;
+                text-align: center;
+                padding: 20px;
+                margin: auto;
+                padding-left: 10%;
+                
+            }
+            
+             #playlist li {
+                margin-top: 10px;
+                 background: none;
+               
+            }
+            
+            #playlist li a{
+                text-decoration: none;
+                color: black;
+                margin-top: 5px;
+                background: none;
+                
+               
+            }
+                #playlist .current-song a{
+                     font-weight: bold;
+                     color: white;
+                }
+            
+            
+            
+            @media only screen and (min-width: 700px) {
+                
+            
+            
+            img {
+                width: 500px;
+              
+            }
+            
+            #contain-aud {
+                width: 500px;
+            }
+                      
+            
+            
+            #playlist{
+                width: 500px;
+                padding-left: 0;
+            }
+            }
+
+                
+       
+            
+        </style>
+    </head>
+    <body>
+      <div id="flex-contain">
+        
+        <div id="contain-list">
+        <ul id="playlist">
+            <h1>Det vildeste Halloween-mix</h1>
+            <li class="current-song"><a href="hallohalloween.mp3">1. Hallo Halloween - Grete Granerud</a></li>
+            <li><a href="DeterHalloween.mp3">2. Det er Halloween - The nightmare before christmas</a></li>
+            <li><a href="monsterfest.mp3">3. Monsterfest - Thorstein Thomsen · Jan Irhøj</a></li>
+            <li><a href="detspøger.mp3">4. Det spøger - Sigurd Barrett</a></li>
+            <li><a href="slikellerballade.mp3">5. Slik eller ballade - Anders And får hekseskud</a></li>
+            <li><a href="monstermonster.mp3">6. Monster Monster - Rosa fra Rouladegade</a></li>
+            <li><a href="Dracula.mp3">7. Dracula - Linda Vilhelmsen</a></li>
+            <li><a href="Varulv-ficeret.mp3">8. Varulve-ficeret - Littlest pet shop</a></li>
+            <li><a href="monstersang.mp3">9. Monstersang - Hoppeline</a></li>
+            <li><a href="scoobi-doo.mp3">10. Hva' så Scooby-Doo? - Scooby-Doo</a></li>
+            <li><a href="spøgelset.mp3">11. Spøgelset - Janne Aagaard</a></li>
+            
+        </ul>
+        </div>
+          
+        <div id="contain-aud">
+        <IMG SRC="halloween_radio.gif">
+        <audio src="" controls id="audioPlayer">
+            Det er jeg ked af, det syge Halloween-Mix kan kun afspilles hvis din browser understøtter HTML5
+        </audio>
+        </div>    
+       
+      </div>
+        
+        <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+        <script>
+            // loads the audio player
+            audioPlayer();
+            function audioPlayer() {
+                var currentSong = 0; 
+                $("#audioPlayer")[0].src = $("#playlist li a")[0];
+                $("#audioPlayer")[0].play();
+                $("#playlist li a").click(function(e){
+                    e.preventDefault();
+                    $("#audioPlayer")[0].src = this;
+                    $("#audioPlayer")[0].play()
+                    $("#playlist li").removeClass("current-song");
+                    currentSong = $(this).parent().index();
+                    $(this).parent().addClass("current-song");
+                });
+                
+                $("#audioPlayer")[0].addEventListener("ended", function(){
+                    currentSong++;
+                        $("#playlist li").removeClass("current-song");
+                        $("#playlist li:eq("+currentSong+")").addClass("current-song");
+                        $("#audioPlayer")[0].src = $("#playlist li a")[currentSong].href;
+                        $("#audioPlayer")[0].play();
+                });
+                
+            }
+        </script>
+        
+        
+    </body>
+</html>
