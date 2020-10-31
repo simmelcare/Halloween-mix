@@ -11,7 +11,7 @@
                 padding: 0;
                 box-sizing: border-box;
                 background: black;
-                height: 120vh;
+                
            
             }
             
@@ -20,20 +20,21 @@
             #flex-contain{
                 display: flex;
                 padding: 2%;
-                width: 100%;
+                width: 100vw;
                 flex-wrap: wrap;
-                justify-content: center;
+                justify-content: flex-start;
             align-items: center;
+                height: 100vh;
             
             }
             
             img {
-                width: 100%;
+                width: 100vw;
                 display: block;
             }
             
             #contain-aud {
-                width: 100%;
+                width: 100vw;
                 align-items: center;
                 
            
@@ -58,7 +59,6 @@
                 list-style: none;
                 background-color: orange;
                 width: 100vw;
-                padding: 2%;
                 text-align: center;
                 margin: auto;
                     margin-left: 1vw;
@@ -80,6 +80,7 @@
                 margin-top: 5px;
                 background: none;
                 
+                
                
             }
                 #playlist .current-song a{
@@ -91,17 +92,34 @@
             display: none;
             }
             
-            audio{
+             audio{
                 width: 60%;
                 }
+            
+            #audioPlayer2{
+            margin-left: 20%;
+            }
+            
+            #audioPlayer{
+            display: none;
+            }
             
             
             @media only screen and (min-width: 1000px) {
                 
-                *{
+              #flex-contain{
                 height: 100vh;
+                  justify-content: center;
                 }
             
+            #audioPlayer{
+            display: block;
+            }
+            
+            #audioPlayer2{
+            display: none;
+            }
+                
             img {
                 width: 500px;
               
@@ -116,8 +134,10 @@
             #playlist{
                 width: 500px;
                 padding-left: 0;
-                                padding: 20px;
             }
+                
+               
+                
             }
 
                 
@@ -154,6 +174,10 @@
             <li><a href="spøgelset.mp3">11. Spøgelset - Janne Aagaard</a></li>
             
         </ul>
+            
+            <audio src="" controls class="aud1" id="audioPlayer2">
+            Det er jeg ked af, det syge Halloween-Mix kan kun afspilles hvis din browser understøtter HTML5
+        </audio>
         </div>
           
         <div id="contain-aud">
@@ -188,6 +212,29 @@
                         $("#playlist li:eq("+currentSong+")").addClass("current-song");
                         $("#audioPlayer")[0].src = $("#playlist li a")[currentSong].href;
                         $("#audioPlayer")[0].play();
+                });
+                
+            }
+            
+                        function audioPlayer2() {
+                var currentSong = 0; 
+                $("#audioPlayer2")[0].src = $("#playlist li a")[0];
+                $("#audioPlayer2")[0].play();
+                $("#playlist li a").click(function(e){
+                    e.preventDefault();
+                    $("#audioPlayer2")[0].src = this;
+                    $("#audioPlayer2")[0].play()
+                    $("#playlist li").removeClass("current-song");
+                    currentSong = $(this).parent().index();
+                    $(this).parent().addClass("current-song");
+                });
+                
+                $("#audioPlayer2")[0].addEventListener("ended", function(){
+                    currentSong++;
+                        $("#playlist li").removeClass("current-song");
+                        $("#playlist li:eq("+currentSong+")").addClass("current-song");
+                        $("#audioPlayer2")[0].src = $("#playlist li a")[currentSong].href;
+                        $("#audioPlayer2")[0].play();
                 });
                 
             }
